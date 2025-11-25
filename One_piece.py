@@ -4,6 +4,7 @@ menu02 = "Menu02 Create".center(40,"=")+"\n1)Create Character\n2)Create Weapon\n
 menu021="Menu021 New Character".center(40,"=")
 menu022= "Mennu022 (New Weapon)".center(40, "=")
 
+
 #DICCIONARIOS
 dict_characters = { 1 : {"name" : "Luffy","category": 1, "weapons": [1, 1],"strength" : 6, "speed" :
 7,"experience": 0},
