@@ -3,6 +3,9 @@ menu00= "Menu 0 (One Piece)".center(40,"=")+"\n1)Play\n2)Create\n3)Edit\n4)List\
 menu02 = "Menu02 Create".center(40,"=")+"\n1)Create Character\n2)Create Weapon\n3)Go back\n"
 menu021="Menu021 New Character".center(40,"=")
 menu022= "Mennu022 (New Weapon)".center(40, "=")
+menu04_listar = "Menu04 (List)".center(40,"=")+"\n1)List Characters\n2)List Weapons\n3)List Side\n4)List Range\n5)Go back"
+menu041_listcharacters = "Menu041 (List Characters)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
+menu042_listweapons = "Menu042 (List Weapons)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
 
 
 #DICCIONARIOS
@@ -77,6 +80,7 @@ while not salir:
         elif opc == 3:
             print("Edit")
         elif opc == 4:
+            # aqui menu 4 y dentro menu characters
             print("List")
         elif opc == 5:
             salir = True
