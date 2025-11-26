@@ -9,46 +9,34 @@ menu042_listweapons = "Menu042 (List Weapons)".center(40,"=")+"\n1)List by ID\n2
 
 
 #DICCIONARIOS
-dict_characters = { 1 : {"name" : "Luffy","category": 1, "weapons": [1, 1],"strength" : 6, "speed" :
-7,"experience": 0},
- 2 : {"name" : "Zoro","category": 1, "weapons" : [4],"strength" : 5, "speed" : 6,"experience":
-0},
- 3 : {"name" : "Sanji", "category" : 1, "weapons" : [1,3],"strength" : 4, "speed" :
-6,"experience": 0 },
- 4 : {"name" : "Buggy", "category" : 2, "weapons" : [3], "strength" : 2, "speed" : 4,
-"experience" : 0},
- 5 : {"name" : "Mr3", "category" : 2, "weapons" : [5], "strength" : 3, "speed" : 2, "experience"
-: 0},
- 6 : {"name" : "Xebec", "category" : 3, "weapons" : [1,3], "strength" : 6, "speed" : 5,
-"experience" : 0},
- 7 : {"name" : "Kaido", "category" : 3, "weapons" : [4], "strength" : 8, "speed" : 3,
-"experience" : 0},
- 8 : {"name" : "Mama grande", "category" : 3, "weapons" : [5], "strength" : 7, "speed" : 1,
-"experience" : 0},
- 9 : {"name" : "Akainu", "category" : 4, "weapons" : [2], "strength" : 6, "speed" : 4,
-"experience" : 0},
- 10 : {"name" : "Kizaru", "category" : 4, "weapons" : [1,3], "strength" : 5, "speed" : 8,
-"experience" : 0},
- 11 : {"name" : "Fujitora", "category" : 4, "weapons" : [5], "strength" : 5, "speed" : 4,
-"experience" : 0},
- 12 : {"name" : "Garp", "category" : 5, "weapons" : [2], "strength" : 6, "speed" : 3,
-"experience" : 0},
- 13 : {"name" : "Smoker", "category" : 5, "weapons" : [5], "strength" : 5, "speed" : 5,
-"experience" : 0},
- 14 : {"name" : "Koby", "category" : 6, "weapons" : [4], "strength" : 3, "speed" : 4,
-"experience" : 0},
- 15 : {"name" : "Tashigi", "category" : 6, "weapons" : [3], "strength" : 4, "speed" : 4,
-"experience" : 0},
+dict_characters = {
+    1 : {"name" : "Luffy","category": 1, "weapons": [1, 1],"strength" : 6, "speed" :7,"experience": 0},
+    2 : {"name" : "Zoro","category": 1, "weapons" : [4],"strength" : 5, "speed" : 6,"experience":0},
+    3 : {"name" : "Sanji", "category" : 1, "weapons" : [1,3],"strength" : 4, "speed" :6,"experience": 0 },
+    4 : {"name" : "Buggy", "category" : 2, "weapons" : [3], "strength" : 2, "speed" : 4,"experience" : 0},
+    5 : {"name" : "Mr3", "category" : 2, "weapons" : [5], "strength" : 3, "speed" : 2, "experience": 0},
+    6 : {"name" : "Xebec", "category" : 3, "weapons" : [1,3], "strength" : 6, "speed" : 5,"experience" : 0},
+    7 : {"name" : "Kaido", "category" : 3, "weapons" : [4], "strength" : 8, "speed" : 3,"experience" : 0},
+    8 : {"name" : "Mama grande", "category" : 3, "weapons" : [5], "strength" : 7, "speed" : 1,"experience" : 0},
+    9 : {"name" : "Akainu", "category" : 4, "weapons" : [2], "strength" : 6, "speed" : 4,"experience" : 0},
+    10 : {"name" : "Kizaru", "category" : 4, "weapons" : [1,3], "strength" : 5, "speed" : 8,"experience" : 0},
+    11 : {"name" : "Fujitora", "category" : 4, "weapons" : [5], "strength" : 5, "speed" : 4,"experience" : 0},
+    12 : {"name" : "Garp", "category" : 5, "weapons" : [2], "strength" : 6, "speed" : 3,"experience" : 0},
+    13 : {"name" : "Smoker", "category" : 5, "weapons" : [5], "strength" : 5, "speed" : 5,"experience" : 0},
+    14 : {"name" : "Koby", "category" : 6, "weapons" : [4], "strength" : 3, "speed" : 4,"experience" : 0},
+    15 : {"name" : "Tashigi", "category" : 6, "weapons" : [3], "strength" : 4, "speed" : 4,"experience" : 0},
  }
-dict_weapons = { 1 : {"name" : "Sword","strength": 3,"speed": 5,"two_hand":False},
- 2 : {"name" : "Greatsword","strength": 5,"speed": 3,"two_hand":True},
- 3 : {"name" : "Gun","strength": 2,"speed": 6,"two_hand":False},
- 4: {"name": "Rifle", "strength": 3, "speed": 4,"two_hand":True},
- 5: {"name": "Chuchi", "strength": 4, "speed": 4,"two_hand":True},
+dict_weapons = { 
+    1 : {"name" : "Sword","strength": 3,"speed": 5,"two_hand":False},
+    2 : {"name" : "Greatsword","strength": 5,"speed": 3,"two_hand":True},
+    3 : {"name" : "Gun","strength": 2,"speed": 6,"two_hand":False},
+    4: {"name": "Rifle", "strength": 3, "speed": 4,"two_hand":True},
+    5: {"name": "Chuchi", "strength": 4, "speed": 4,"two_hand":True},
  }
-dict_crews = { 1 : {"name" : "Straw hat","members": [8,6]},
- 2 : {"name" : "Pirates Buggy","members": [1,3,5]},
- 3: {"name": "Pirates Rocks","members": [2,4,7,]}
+dict_crews = { 
+    1 : {"name" : "Straw hat","members": [8,6]},
+    2 : {"name" : "Pirates Buggy","members": [1,3,5]},
+    3: {"name": "Pirates Rocks","members": [2,4,7,]}
  }
 dict_ranks = { 1 : {"name" : "Admiral","members": [9,10,11]},
  2 : {"name" : "ViceAdmiral","members": [12,13]},
@@ -81,7 +69,112 @@ while not salir:
             print("Edit")
         elif opc == 4:
             # aqui menu 4 y dentro menu characters
-            print("List")
+            # Menu PERSONAJES por ID
+            for pasada in range(len(list_characters)-1):
+                cambio = False
+                for i in range(len(list_characters)-1-pasada):
+                    if list_characters[i] > list_characters[i+1]:
+                        cambio = True
+                        aux = list_characters[i]
+                        list_characters[i] = list_characters[i+1]
+                        list_characters[i+1]= aux
+                if not cambio:
+                    break
+            # PARA MOSTRAR
+            for id in list_characters:
+                # dict_characters[id]
+                suma_fuerza = dict_characters[id]["strength"]
+                suma_velocidad = dict_characters[id]["speed"]
+
+                for arma_id in dict_characters[id]["weapons"]:
+                    # dict_weapons[arma_id]
+                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
+                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
+
+                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
+                                                                            suma_fuerza,
+                                                                            suma_velocidad,
+                                                                            dict_characters[id]["experience"])
+            print(datos)
+
+            # MOSTRAR PERSONAJES POR NOMBRE
+
+            # MOSTRAR PERSONAJES POR STRENGTH
+            
+            for pasada in range(len(list_characters)-1):
+                cambio = False
+                for i in range(len(list_characters)-1-pasada):
+                    # cogue el valor de fuerza del personaje
+                    suma_fuerza = dict_characters[list_characters[i]]["strength"]
+                    # suma la fuerza del primer personaje
+                    for arma_id in dict_characters[list_characters[i]]["weapons"]:
+                        suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
+                    suma_fuerza_siguiente = dict_characters[list_characters[i+1]]["strength"]
+                    #suma la fuerza del siguiente
+                    for arma_id in dict_characters[list_characters[i+1]]["weapons"]:
+                        suma_fuerza_siguiente = suma_fuerza_siguiente +  dict_weapons[arma_id]["strength"]
+                    if suma_fuerza > suma_fuerza_siguiente:
+                        cambio = True
+                        aux = list_characters[i]
+                        list_characters[i] = list_characters[i+1]
+                        list_characters[i+1]= aux
+                if not cambio:
+                    break
+
+            for id in list_characters:
+                # dict_characters[id]
+                suma_fuerza = dict_characters[id]["strength"]
+                suma_velocidad = dict_characters[id]["speed"]
+
+                for arma_id in dict_characters[id]["weapons"]:
+                    # dict_weapons[arma_id]
+                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
+                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
+
+
+                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
+                                                                            suma_fuerza,
+                                                                            suma_velocidad,
+                                                                            dict_characters[id]["experience"])
+            print(datos)
+            # MOSTRAR PERSONAJES POR SPEED
+            for pasada in range(len(list_characters)-1):
+                cambio = False
+                for i in range(len(list_characters)-1-pasada):
+                    # cogue el valor de fuerza del personaje
+                    suma_velocidad = dict_characters[list_characters[i]]["speed"]
+                    # suma la fuerza del primer personaje
+                    for arma_id in dict_characters[list_characters[i]]["weapons"]:
+                        suma_velocidad = suma_velocidad+ dict_weapons[arma_id]["speed"]
+                    suma_velocidad_siguiente = dict_characters[list_characters[i+1]]["speed"]
+                    #suma la fuerza del siguiente
+                    for arma_id in dict_characters[list_characters[i+1]]["weapons"]:
+                        suma_velocidad_siguiente = suma_velocidad_siguiente +  dict_weapons[arma_id]["speed"]
+                    if suma_velocidad > suma_velocidad_siguiente:
+                        cambio = True
+                        aux = list_characters[i]
+                        list_characters[i] = list_characters[i+1]
+                        list_characters[i+1]= aux
+                if not cambio:
+                    break
+
+            for id in list_characters:
+                # dict_characters[id]
+                suma_fuerza = dict_characters[id]["strength"]
+                suma_velocidad = dict_characters[id]["speed"]
+
+                for arma_id in dict_characters[id]["weapons"]:
+                    # dict_weapons[arma_id]
+                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
+                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
+
+
+                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
+                                                                            suma_fuerza,
+                                                                            suma_velocidad,
+                                                                            dict_characters[id]["experience"])
+            print(datos)
+            
         elif opc == 5:
             salir = True
             print("-"*20+"\nHasta la proxima!\n"+"-"*20)
