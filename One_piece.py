@@ -2,7 +2,9 @@
 menu00= "Menu 0 (One Piece)".center(40,"=")+"\n1)Play\n2)Create\n3)Edit\n4)List\n5)Exit\n"
 menu02 = "Menu02 Create".center(40,"=")+"\n1)Create Character\n2)Create Weapon\n3)Go back\n"
 menu021="Menu021 New Character".center(40,"=")
-menu022= "Mennu022 (New Weapon)".center(40, "=")
+menu022= "Menu022 (New Weapon)".center(40, "=")
+menu03= "Menu 03 (Edit Menu)".center(40,"=")+"\n1)Edit character\n2)Edit weapon\n3)Go back\n"
+menu031= "Menu 031 (Select Caracter to Edit)".center(40,"=")
 menu04_listar = "Menu04 (List)".center(40,"=")+"\n1)List Characters\n2)List Weapons\n3)List Side\n4)List Range\n5)Go back"
 menu041_listcharacters = "Menu041 (List Characters)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
 menu042_listweapons = "Menu042 (List Weapons)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
@@ -46,12 +48,12 @@ dict_categorys = {1:"Straw hat",2:"Pirates Buggy",3:"Pirates Rocks",4:"Admiral",
 
 flg_00=True
 flg_02=False
-flg_021=False
+flg_03=False
 flg_04=False
 salir = False
 while not salir:
     print(menu00)
-    opc=input("Option:\n")
+    opc=input("->Option: ")
     if not opc.isdigit():
         print("Invalid Option".center(30,"="))
         input("Enter to continue")
@@ -66,7 +68,8 @@ while not salir:
             flg_00=False
             flg_02=True
         elif opc == 3:
-            print("Edit")
+            flg_00=False
+            flg_03=True
         elif opc == 4:
             flg_00=False
             flg_04=True
@@ -76,51 +79,242 @@ while not salir:
     #MENU OPC 2
     while flg_02:
         print(menu02)
-        opc=input("Option:\n")
+        opc=input("->Option: ")
         if not opc.isdigit():
             print("Invalid Option".center(40,"="))
-            input("Enter to continue")
+            input("Press enter to continue")
         elif not (int(opc) in range(1,4)):
             print("Invalid Option".center(40,"="))
-            input("Enter to continue")
+            input("Press enter to continue")
         else:
             opc=int(opc)
             if opc == 1:
-                print("Create Character")
+                flg_021 = False
+                flg_00 = True
+                #
+                # Name: new_character
+                # Category: ViceAdmiral
+                # Weapons:
+                # Strength: 9
+                # Speed: 6
+                # Experience: 0
+                # Save this player S\N
+                while flg_021:
+                    new_character= input("Name of the new character:\n")
+                    new_character.replace(" ","")
+                    print("Side of the new character:\n1)Marine\n2)Pirates")
+                    opc=input("->Option: ")
+                    if not opc.isdigit():
+                        print("Invalid Option".center(40,"="))
+                        input("Press enter to continue")
+                    elif not (int(opc) in range(1,3)):
+                        print("Invalid Option".center(40,"="))
+                        input("Press enter to continue")
+                    else:
+                        if opc == 1:
+                            print("1) Admiral 2) ViceAdmiral 3) lieutenant")
+                    # else:
+                    #     print("Range or crew of the new character:\n1) Admiral\n2) ViceAdmiral\n3) lieutenant")
+                    #     opc=input("->Option: ")
+                    #     if not opc.isdigit():
+                    #         print("Invalid Option".center(40,"="))
+                    #         input("Press enter to continue")
+                    #     elif not (int(opc) in range(1,4)):
+                    #         print("Invalid Option".center(40,"="))
+                    #         input("Press enter to continue")
+                    #     #else:
+
             elif opc == 2:
                 print("Create Weapons")
             elif opc == 3:
                 flg_00= True
                 flg_02=False
 
-    #MENU OPC 4
-    while flg_04:
-        print(menu04_listar)
-        opc=input("Option:\n")
+    while flg_03:
+        print(menu03)
+        opc = input("->Option: ")
         if not opc.isdigit():
-            print("Invalid Option".center(40,"="))
+            print("Invalid Option".center(30, "="))
             input("Enter to continue")
-        elif not (int(opc) in range(1,6)):
-            print("Invalid Option".center(40,"="))
+        elif not (int(opc) in range(1, 4)):
+            print("Invalid Option".center(30, "="))
             input("Enter to continue")
         else:
             opc=int(opc)
             if opc == 1:
-                flg_041=True
-                flg_04=False
+                flg_03 = False
+                flg_031 = True
+                flg_0311 = False
+                while flg_031:
+                    print(menu031)
+                    flg_0311 = False
+                    flg_031 = True
+                    menu_edit= "1)Name\n2)Weapons\n3)Go Back"
+                    #Ver personajes a editar
+                    for id in dict_characters:
+                        mostrar_character = dict_characters[id]
+                        #Convertir weapons en nombres
+                        weapons_str = ""
+                        for w in mostrar_character["weapons"]:
+                            if weapons_str == "":
+                                weapons_str = dict_weapons[w]["name"]
+                            else:
+                                weapons_str = weapons_str+ "," + dict_weapons[w]["name"]
+                        print("ID: {},Name: {},Category: {},Weapons: {},Strength: {},Speed: {},Experience: {}".format(
+                        id,
+                        mostrar_character["name"],
+                        dict_categorys[mostrar_character["category"]],
+                        weapons_str,
+                        mostrar_character["strength"],
+                        mostrar_character["speed"],
+                        mostrar_character["experience"]))
+                    id_personaje=int(input("ID to edit:\n"))
+                    if id_personaje in dict_characters:
+                        personaje = dict_characters[id_personaje]
+                        print("Select feature to edit to character ID:{}, Name: {} ".format(id_personaje,personaje["name"]))
+                        flg_0311= True
+                        flg_031 = False
+                        while flg_0311:
+                            print(menu_edit)
+                            opc_edit = input("->Option: ")
+                            if not opc_edit.isdigit():
+                                print("Invalid Option".center(30, "="))
+                                input("Enter to continue")
+                            elif not (int(opc_edit) in range(1, 4)):
+                                print("Invalid Option".center(30, "="))
+                                input("Enter to continue")
+                            else:
+                                opc_edit=int(opc_edit)
+                                #editar nombre
+                                if opc_edit == 1:
+                                    name_edit= input("Enter the new name:\n")
+                                    name_edit.replace(" ","")
+                                    opc_save=input("Do you want to change name {} by {}?\n".format(personaje["name"],name_edit))
+                                    while opc_save.lower() != "n" and opc_save.lower() != "y":
+                                        print("wrong option")
+                                        opc_save = input(
+                                            "Do you want to change name {} by {}?\n".format(personaje["name"], name_edit))
+                                    if opc_save.lower() == "y":
+                                        personaje["name"] = name_edit
+                                        flg_0311 = False
+                                        flg_031 = False
+                                        flg_03 = False
+                                        flg_00 = True
+                                    elif opc_save.lower() == "n":
+                                        print("Don't save changes")
+                                        flg_0311 = False
+                                        flg_031 = False
+                                        flg_03 = False
+                                        flg_00 = True
+
+
+                                #editar armas del personaje
+                                elif opc_edit == 2:
+                                    rangelist= []
+                                    armas_disponibles= "Available Weapons".center(40,"=")
+                                    armas_personajes = "Character Weapons:".center(40,"=")
+                                    sin_armas="None".center(30,"-")
+                                    for w in personaje["weapons"]:
+                                        rangelist.append(w)
+                                    print("rangelist = ",rangelist)
+                                    print(armas_disponibles)
+                                    if len(dict_weapons) == 0:
+                                        print(sin_armas)
+                                    else:
+                                        for a in dict_weapons:
+                                            armas= dict_weapons[a]
+                                        print(armas_personajes)
+                                        print("{} ) {}, Strength: {}, Speed {}".format(a, armas["name"], armas["strength"], armas["speed"]))
+                                        flg_0311 = False
+                                        flg_031 = False
+                                        flg_03 = False
+                                        flg_00 = True
+                                elif opc_edit == 3:
+                                    flg_0311=False
+                                    flg_031 = True
+
+                    flg_00 = True
+                    flg_03=False
+
+
+
+
+            elif opc == 2:
+                print("Edit Weapons")
+            elif opc == 3:
+                flg_00 = True
+                flg_03=False
+
+# MENU OPC 4
+    while flg_04:
+        print(menu04_listar)
+        opc = input("Option:\n")
+        if not opc.isdigit():
+            print("Invalid Option".center(40, "="))
+            input("Enter to continue")
+        elif not (int(opc) in range(1, 6)):
+            print("Invalid Option".center(40, "="))
+            input("Enter to continue")
+        else:
+            opc = int(opc)
+            if opc == 1:
+                flg_041 = True
+                flg_04 = False
                 while flg_041:
                     print(menu041_listcharacters)
-                    opc=input("Option:\n")
+                    opc = input("Option:\n")
                     if not opc.isdigit():
-                        print("Invalid Option".center(40,"="))
+                        print("Invalid Option".center(40, "="))
                         input("Enter to continue")
-                    elif not (int(opc) in range(1,6)):
-                        print("Invalid Option".center(40,"="))
+                    elif not (int(opc) in range(1, 6)):
+                        print("Invalid Option".center(40, "="))
                         input("Enter to continue")
                     else:
-                        opc=int(opc)
+                        opc = int(opc)
                         if opc == 1:
-                            print("List by ID")
+                            cabecera_character_id = "Characters ordered by ID".center(60,
+                                                                                      "=") + "\n" + "{:>3}{:>15}{:>15}{:>10}{:>15}".format(
+                                "ID",
+                                "Name", "strength",
+                                "speed",
+                                "experience") + "\n" + "*" * 60
+                            list_characters = list(dict_characters.keys())
+                            datos = ""
+                            print(cabecera_character_id)
+
+                            # ORDENAR ID
+                            for pasada in range(len(list_characters) - 1):
+                                cambio = False
+
+                                for i in range(len(list_characters) - 1 - pasada):
+                                    if list_characters[i] > list_characters[i + 1]:
+                                        cambio = True
+                                        aux = list_characters[i]
+                                        list_characters[i] = list_characters[i + 1]
+                                        list_characters[i + 1] = aux
+
+                                if not cambio:
+                                    break
+
+                            # PARA MOSTRAR
+                            for id in list_characters:
+                                # dict_characters[id]
+                                suma_fuerza = dict_characters[id]["strength"]
+                                suma_velocidad = dict_characters[id]["speed"]
+
+                                for arma_id in dict_characters[id]["weapons"]:
+                                    # dict_weapons[arma_id]
+                                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
+                                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
+
+                                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id][
+                                    "name"],
+                                                                                         suma_fuerza,
+                                                                                         suma_velocidad,
+                                                                                         dict_characters[id][
+                                                                                             "experience"])
+                            print(datos)
+                            input("Enter to continue")
                         elif opc == 2:
                             print("List by name")
                         elif opc == 3:
@@ -128,22 +322,22 @@ while not salir:
                         elif opc == 4:
                             print("List by speed")
                         elif opc == 5:
-                            flg_041=False
-                            flg_04=True
+                            flg_041 = False
+                            flg_04 = True
             elif opc == 2:
-                flg_042=True
-                flg_04=False
+                flg_042 = True
+                flg_04 = False
                 while flg_042:
                     print(menu042_listweapons)
-                    opc=input("Option:\n")
+                    opc = input("Option:\n")
                     if not opc.isdigit():
-                        print("Invalid Option".center(40,"="))
+                        print("Invalid Option".center(40, "="))
                         input("Enter to continue")
-                    elif not (int(opc) in range(1,6)):
-                        print("Invalid Option".center(40,"="))
+                    elif not (int(opc) in range(1, 6)):
+                        print("Invalid Option".center(40, "="))
                         input("Enter to continue")
                     else:
-                        opc=int(opc)
+                        opc = int(opc)
                         if opc == 1:
                             print("List by ID")
                         elif opc == 2:
@@ -153,9 +347,12 @@ while not salir:
                         elif opc == 4:
                             print("List by speed")
                         elif opc == 5:
-                            flg_042=False
-                            flg_04=True
+                            flg_042 = False
+                            flg_04 = True
             elif opc == 3:
                 print("List Side")
             elif opc == 4:
                 print("List Range")
+            elif opc == 5:
+                flg_04=False
+                flg_00= True
