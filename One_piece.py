@@ -308,7 +308,7 @@ while not salir:
                                     suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
                                     suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
 
-                                datos_id = datos_id + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id][
+                                datos_id_character = datos_id_character + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id][
                                     "name"],
                                                                                          suma_fuerza,
                                                                                          suma_velocidad,
@@ -346,7 +346,7 @@ while not salir:
                                     suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
                                     suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
 
-                                datos_name = datos_name + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
+                                datos_name_character = datos_name_character + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
                                                                                         suma_fuerza,
                                                                                         suma_velocidad,
                                                                                         dict_characters[id]["experience"])
@@ -395,7 +395,7 @@ while not salir:
                                     suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
                                     suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
 
-                                datos_strength = datos_strength + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
+                                datos_strength_character = datos_strength_character + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
                                                                                             suma_fuerza,
                                                                                             suma_velocidad,
                                                                                             dict_characters[id]["experience"])
@@ -444,7 +444,7 @@ while not salir:
                                     suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
 
 
-                                datos_speed = datos_speed + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
+                                datos_speed_character = datos_speed_character + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
                                                                                             suma_fuerza,
                                                                                             suma_velocidad,
                                                                                             dict_characters[id]["experience"])
@@ -468,6 +468,39 @@ while not salir:
                         opc = int(opc)
                         if opc == 1:
                             print("List by ID")
+                            list_weapons = list(dict_weapons.keys())
+                            cabecera_weapon_id = "Characters ordered by ID".center(60,"=")+ "\n"+"{:>3}{:>15}{:>15}{:>10}{:>15}".format("ID","Name","strength","speed","two_hand")+"\n"+"*"*60+"\n"
+                            datos_id_arma = ""
+                            print(cabecera_weapon_id)
+
+                            # ORDENAR ID
+                            for pasada in range(len(list_weapons)-1):
+                                cambio = False
+
+                                for i in range(len(list_weapons)-1-pasada):
+                                    if list_weapons[i] > list_weapons[i+1]:
+                                        cambio = True
+                                        aux = list_weapons[i]
+                                        list_weapons[i] = list_weapons[i+1]
+                                        list_weapons[i+1]= aux
+
+                                if not cambio:
+                                    break
+
+                            # PARA MOSTRAR
+                            for id in list_weapons:
+                                # dict_characters[id]
+                                arma =""
+
+                                if dict_weapons[id]["two_hand"]:
+                                    arma = "True"
+                                else:
+                                    arma = "False"
+                                datos_id_arma = datos_id_arma + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_weapons[id]["name"],
+                                                                                            dict_weapons[id]["strength"],
+                                                                                            dict_weapons[id]["speed"],
+                                                                                            arma)
+                            print(datos_id_arma)
                         elif opc == 2:
                             print("List by name")
                         elif opc == 3:
