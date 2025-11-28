@@ -273,7 +273,7 @@ while not salir:
                         opc = int(opc)
                         if opc == 1:
                             print("List by ID")
-                            datos_id = ""
+                            datos_id_character = ""
                             cabecera_character_id = "Characters ordered by ID".center(60,
                                                                                       "=") + "\n" + "{:>3}{:>15}{:>15}{:>10}{:>15}".format(
                                 "ID",
@@ -314,11 +314,11 @@ while not salir:
                                                                                          suma_velocidad,
                                                                                          dict_characters[id][
                                                                                              "experience"])
-                            print(datos_id)
+                            print(datos_id_character)
                             input("Enter to continue")
                         elif opc == 2:
                             print("List by name")
-                            datos_name = ""
+                            datos_name_character = ""
                             list_characters = list(dict_characters.keys())
                             cabecera_character_name = "Characters ordered by NAME".center(60, "=") + "\n" + "{:>3}{:>15}{:>15}{:>10}{:>15}".format("ID","Name","Strength","Speed","Experience")+ "\n" + "*" * 60
                             print(cabecera_character_name)
@@ -351,10 +351,10 @@ while not salir:
                                                                                         suma_velocidad,
                                                                                         dict_characters[id]["experience"])
 
-                            print(datos_name)
+                            print(datos_name_character)
                         elif opc == 3:
                             print("List by StreNght")
-                            datos_strength = ""
+                            datos_strength_character = ""
                             list_characters = list(dict_characters.keys())
                             cabecera_character_strength = "Characters ordered by STRENGTH".center(60, "=") + "\n" + "{:>3}{:>15}{:>15}{:>10}{:>15}".format("ID","Name","Strength","Speed","Experience")+ "\n" + "*" * 60
                             print(cabecera_character_strength)
@@ -399,11 +399,11 @@ while not salir:
                                                                                             suma_fuerza,
                                                                                             suma_velocidad,
                                                                                             dict_characters[id]["experience"])
-                            print(datos_strength)
+                            print(datos_strength_character)
                         elif opc == 4:
                             print("List by speed")
                             #  Listar personajes POR SPEED
-                            datos_speed = ""
+                            datos_speed_character = ""
                             list_characters = list(dict_characters.keys())
                             cabecera_character_speed = "Characters ordered by SPEED".center(60, "=") + "\n" + "{:>3}{:>15}{:>15}{:>10}{:>15}".format("ID","Name","Strength","Speed","Experience")+ "\n" + "*" * 60
                             print(cabecera_character_speed)
@@ -448,7 +448,7 @@ while not salir:
                                                                                             suma_fuerza,
                                                                                             suma_velocidad,
                                                                                             dict_characters[id]["experience"])
-                            print(datos_speed)
+                            print(datos_speed_character)
                         elif opc == 5:
                             flg_041 = False
                             flg_04 = True
