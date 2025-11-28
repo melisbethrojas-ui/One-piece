@@ -68,113 +68,8 @@ while not salir:
         elif opc == 3:
             print("Edit")
         elif opc == 4:
-            # aqui menu 4 y dentro menu characters
-            # Menu PERSONAJES por ID
-            for pasada in range(len(list_characters)-1):
-                cambio = False
-                for i in range(len(list_characters)-1-pasada):
-                    if list_characters[i] > list_characters[i+1]:
-                        cambio = True
-                        aux = list_characters[i]
-                        list_characters[i] = list_characters[i+1]
-                        list_characters[i+1]= aux
-                if not cambio:
-                    break
-            # PARA MOSTRAR
-            for id in list_characters:
-                # dict_characters[id]
-                suma_fuerza = dict_characters[id]["strength"]
-                suma_velocidad = dict_characters[id]["speed"]
-
-                for arma_id in dict_characters[id]["weapons"]:
-                    # dict_weapons[arma_id]
-                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
-                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
-
-                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
-                                                                            suma_fuerza,
-                                                                            suma_velocidad,
-                                                                            dict_characters[id]["experience"])
-            print(datos)
-
-            # MOSTRAR PERSONAJES POR NOMBRE
-
-            # MOSTRAR PERSONAJES POR STRENGTH
-            
-            for pasada in range(len(list_characters)-1):
-                cambio = False
-                for i in range(len(list_characters)-1-pasada):
-                    # cogue el valor de fuerza del personaje
-                    suma_fuerza = dict_characters[list_characters[i]]["strength"]
-                    # suma la fuerza del primer personaje
-                    for arma_id in dict_characters[list_characters[i]]["weapons"]:
-                        suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
-                    suma_fuerza_siguiente = dict_characters[list_characters[i+1]]["strength"]
-                    #suma la fuerza del siguiente
-                    for arma_id in dict_characters[list_characters[i+1]]["weapons"]:
-                        suma_fuerza_siguiente = suma_fuerza_siguiente +  dict_weapons[arma_id]["strength"]
-                    if suma_fuerza > suma_fuerza_siguiente:
-                        cambio = True
-                        aux = list_characters[i]
-                        list_characters[i] = list_characters[i+1]
-                        list_characters[i+1]= aux
-                if not cambio:
-                    break
-
-            for id in list_characters:
-                # dict_characters[id]
-                suma_fuerza = dict_characters[id]["strength"]
-                suma_velocidad = dict_characters[id]["speed"]
-
-                for arma_id in dict_characters[id]["weapons"]:
-                    # dict_weapons[arma_id]
-                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
-                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
-
-
-                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
-                                                                            suma_fuerza,
-                                                                            suma_velocidad,
-                                                                            dict_characters[id]["experience"])
-            print(datos)
-            # MOSTRAR PERSONAJES POR SPEED
-            for pasada in range(len(list_characters)-1):
-                cambio = False
-                for i in range(len(list_characters)-1-pasada):
-                    # cogue el valor de fuerza del personaje
-                    suma_velocidad = dict_characters[list_characters[i]]["speed"]
-                    # suma la fuerza del primer personaje
-                    for arma_id in dict_characters[list_characters[i]]["weapons"]:
-                        suma_velocidad = suma_velocidad+ dict_weapons[arma_id]["speed"]
-                    suma_velocidad_siguiente = dict_characters[list_characters[i+1]]["speed"]
-                    #suma la fuerza del siguiente
-                    for arma_id in dict_characters[list_characters[i+1]]["weapons"]:
-                        suma_velocidad_siguiente = suma_velocidad_siguiente +  dict_weapons[arma_id]["speed"]
-                    if suma_velocidad > suma_velocidad_siguiente:
-                        cambio = True
-                        aux = list_characters[i]
-                        list_characters[i] = list_characters[i+1]
-                        list_characters[i+1]= aux
-                if not cambio:
-                    break
-
-            for id in list_characters:
-                # dict_characters[id]
-                suma_fuerza = dict_characters[id]["strength"]
-                suma_velocidad = dict_characters[id]["speed"]
-
-                for arma_id in dict_characters[id]["weapons"]:
-                    # dict_weapons[arma_id]
-                    suma_fuerza = suma_fuerza + dict_weapons[arma_id]["strength"]
-                    suma_velocidad = suma_velocidad + dict_weapons[arma_id]["speed"]
-
-
-                datos = datos + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_characters[id]["name"],
-                                                                            suma_fuerza,
-                                                                            suma_velocidad,
-                                                                            dict_characters[id]["experience"])
-            print(datos)
-            
+            flg_00=False
+            flg_04=True
         elif opc == 5:
             salir = True
             print("-"*20+"\nHasta la proxima!\n"+"-"*20)
@@ -197,3 +92,70 @@ while not salir:
             elif opc == 3:
                 flg_00= True
                 flg_02=False
+
+    #MENU OPC 4
+    while flg_04:
+        print(menu04_listar)
+        opc=input("Option:\n")
+        if not opc.isdigit():
+            print("Invalid Option".center(40,"="))
+            input("Enter to continue")
+        elif not (int(opc) in range(1,6)):
+            print("Invalid Option".center(40,"="))
+            input("Enter to continue")
+        else:
+            opc=int(opc)
+            if opc == 1:
+                flg_041=True
+                flg_04=False
+                while flg_041:
+                    print(menu041_listcharacters)
+                    opc=input("Option:\n")
+                    if not opc.isdigit():
+                        print("Invalid Option".center(40,"="))
+                        input("Enter to continue")
+                    elif not (int(opc) in range(1,6)):
+                        print("Invalid Option".center(40,"="))
+                        input("Enter to continue")
+                    else:
+                        opc=int(opc)
+                        if opc == 1:
+                            print("List by ID")
+                        elif opc == 2:
+                            print("List by name")
+                        elif opc == 3:
+                            print("List by Streght")
+                        elif opc == 4:
+                            print("List by speed")
+                        elif opc == 5:
+                            flg_041=False
+                            flg_04=True
+            elif opc == 2:
+                flg_042=True
+                flg_04=False
+                while flg_042:
+                    print(menu042_listweapons)
+                    opc=input("Option:\n")
+                    if not opc.isdigit():
+                        print("Invalid Option".center(40,"="))
+                        input("Enter to continue")
+                    elif not (int(opc) in range(1,6)):
+                        print("Invalid Option".center(40,"="))
+                        input("Enter to continue")
+                    else:
+                        opc=int(opc)
+                        if opc == 1:
+                            print("List by ID")
+                        elif opc == 2:
+                            print("List by name")
+                        elif opc == 3:
+                            print("List by Streght")
+                        elif opc == 4:
+                            print("List by speed")
+                        elif opc == 5:
+                            flg_042=False
+                            flg_04=True
+            elif opc == 3:
+                print("List Side")
+            elif opc == 4:
+                print("List Range")
