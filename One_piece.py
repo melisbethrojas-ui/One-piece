@@ -8,6 +8,7 @@ menu031= "Menu 031 (Select Caracter to Edit)".center(40,"=")
 menu04_listar = "Menu04 (List)".center(40,"=")+"\n1)List Characters\n2)List Weapons\n3)List Side\n4)List Range\n5)Go back"
 menu041_listcharacters = "Menu041 (List Characters)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
 menu042_listweapons = "Menu042 (List Weapons)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
+cabecera_weapon_id = "Characters ordered by ID".center(60,"=")+ "\n"+"{:>3}{:>15}{:>15}{:>10}{:>15}".format("ID","Name","strength","speed","two_hand")+"\n"+"*"*60+"\n"
 
 
 #DICCIONARIOS
@@ -469,7 +470,6 @@ while not salir:
                         if opc == 1:
                             print("List by ID")
                             list_weapons = list(dict_weapons.keys())
-                            cabecera_weapon_id = "Characters ordered by ID".center(60,"=")+ "\n"+"{:>3}{:>15}{:>15}{:>10}{:>15}".format("ID","Name","strength","speed","two_hand")+"\n"+"*"*60+"\n"
                             datos_id_arma = ""
                             print(cabecera_weapon_id)
 
@@ -503,10 +503,107 @@ while not salir:
                             print(datos_id_arma)
                         elif opc == 2:
                             print("List by name")
+                            # Listar armas POR NAME
+                            print(cabecera_weapon_id)
+                            list_weapons = list(dict_weapons.keys())
+                            datos_name_arma = ""
+
+                            for pasada in range(len(list_weapons)-1):
+                                cambio = False
+
+                                for i in range(len(list_weapons)-1-pasada):
+                                    nombre_arma_inicial = dict_weapons[list_weapons[i]]["name"]
+                                    nombre_arma_siguiente = dict_weapons[list_weapons[i + 1]]["name"]
+                                    if nombre_arma_inicial > nombre_arma_siguiente:
+                                        cambio = True
+                                        aux = list_weapons[i]
+                                        list_weapons[i] = list_weapons[i+1]
+                                        list_weapons[i+1]= aux
+
+                                if not cambio:
+                                    break
+
+                            for id in list_weapons:
+                                arma = ""
+
+                                if dict_weapons[id]["two_hand"]:
+                                    arma = "True"
+                                else:
+                                    arma = "False"
+                                datos_name_arma =  datos_name_arma + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_weapons[id]["name"],
+                                                                                                                        dict_weapons[id]["strength"],
+                                                                                                                        dict_weapons[id]["speed"],
+                                                                                                                        arma)
+
+                            print(datos_name_arma)
                         elif opc == 3:
-                            print("List by Streght")
+                            print("List by Strenght")
+                            print(cabecera_weapon_id)
+                            list_weapons = list(dict_weapons.keys())
+                            datos_strength_arma = ""
+
+                            for pasada in range(len(list_weapons)-1):
+                                cambio = False
+
+                                for i in range(len(list_weapons)-1-pasada):
+                                    fuerza_arma_inicial = dict_weapons[list_weapons[i]]["strength"]
+                                    fuerza_arma_siguiente = dict_weapons[list_weapons[i + 1]]["strength"]
+                                    if fuerza_arma_inicial > fuerza_arma_siguiente:
+                                        cambio = True
+                                        aux = list_weapons[i]
+                                        list_weapons[i] = list_weapons[i+1]
+                                        list_weapons[i+1]= aux
+
+                                if not cambio:
+                                    break
+
+                            for id in list_weapons:
+                                arma = ""
+
+                                if dict_weapons[id]["two_hand"]:
+                                    arma = "True"
+                                else:
+                                    arma = "False"
+                                datos_strength_arma =  datos_strength_arma + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_weapons[id]["name"],
+                                                                                                                        dict_weapons[id]["strength"],
+                                                                                                                        dict_weapons[id]["speed"],
+                                                                                                                        arma)
+
+                            print(datos_strength_arma)
                         elif opc == 4:
                             print("List by speed")
+                            print(cabecera_weapon_id)
+                            list_weapons = list(dict_weapons.keys())
+                            datos_speed_arma = ""
+
+                            for pasada in range(len(list_weapons)-1):
+                                cambio = False
+
+                                for i in range(len(list_weapons)-1-pasada):
+                                    speed_arma_inicial = dict_weapons[list_weapons[i]]["speed"]
+                                    speed_arma_siguiente = dict_weapons[list_weapons[i + 1]]["speed"]
+                                    if speed_arma_inicial > speed_arma_siguiente:
+                                        cambio = True
+                                        aux = list_weapons[i]
+                                        list_weapons[i] = list_weapons[i+1]
+                                        list_weapons[i+1]= aux
+
+                                if not cambio:
+                                    break
+
+                            for id in list_weapons:
+                                arma = ""
+
+                                if dict_weapons[id]["two_hand"]:
+                                    arma = "True"
+                                else:
+                                    arma = "False"
+                                datos_speed_arma =  datos_speed_arma + "{:>3}{:>15}{:>15}{:>10}{:>15}\n".format(id, dict_weapons[id]["name"],
+                                                                                                                        dict_weapons[id]["strength"],
+                                                                                                                        dict_weapons[id]["speed"],
+                                                                                                                        arma)
+
+                            print(datos_speed_arma)
                         elif opc == 5:
                             flg_042 = False
                             flg_04 = True
