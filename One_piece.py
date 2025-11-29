@@ -131,6 +131,7 @@ while not salir:
                 flg_00= True
                 flg_02=False
 
+    # MENU OPC 3
     while flg_03:
         print(menu03)
         opc = input("->Option: ")
@@ -148,8 +149,6 @@ while not salir:
                 flg_0311 = False
                 while flg_031:
                     print(menu031)
-                    flg_0311 = False
-                    flg_031 = True
                     menu_edit= "1)Name\n2)Weapons\n3)Go Back"
                     #Ver personajes a editar
                     for id in dict_characters:
@@ -161,20 +160,18 @@ while not salir:
                                 weapons_str = dict_weapons[w]["name"]
                             else:
                                 weapons_str = weapons_str+ "," + dict_weapons[w]["name"]
-                        print("ID: {},Name: {},Category: {},Weapons: {},Strength: {},Speed: {},Experience: {}".format(
-                        id,
-                        mostrar_character["name"],
-                        dict_categorys[mostrar_character["category"]],
-                        weapons_str,
-                        mostrar_character["strength"],
-                        mostrar_character["speed"],
-                        mostrar_character["experience"]))
+                        print("ID: {},Name: {},Category: {},Weapons: {},Strength: {},Speed: {},Experience: {}".format(id,mostrar_character["name"],
+                        dict_categorys[mostrar_character["category"]],weapons_str,mostrar_character["strength"],mostrar_character["speed"],mostrar_character["experience"]))
+
                     id_personaje=int(input("ID to edit:\n"))
+                    #comprobar si esta en el diccionario
                     if id_personaje in dict_characters:
                         personaje = dict_characters[id_personaje]
                         print("Select feature to edit to character ID:{}, Name: {} ".format(id_personaje,personaje["name"]))
                         flg_0311= True
                         flg_031 = False
+
+                        #Menu editar
                         while flg_0311:
                             print(menu_edit)
                             opc_edit = input("->Option: ")
@@ -186,62 +183,253 @@ while not salir:
                                 input("Enter to continue")
                             else:
                                 opc_edit=int(opc_edit)
-                                #editar nombre
+                                # Editar nombre del personaje
                                 if opc_edit == 1:
                                     name_edit= input("Enter the new name:\n")
-                                    name_edit.replace(" ","")
                                     opc_save=input("Do you want to change name {} by {}?\n".format(personaje["name"],name_edit))
                                     while opc_save.lower() != "n" and opc_save.lower() != "y":
                                         print("wrong option")
-                                        opc_save = input(
-                                            "Do you want to change name {} by {}?\n".format(personaje["name"], name_edit))
+                                        opc_save = input("Do you want to change name {} by {}?\n".format(personaje["name"], name_edit))
+                                    # Para guardar los cambios
                                     if opc_save.lower() == "y":
                                         personaje["name"] = name_edit
                                         flg_0311 = False
                                         flg_031 = False
-                                        flg_03 = False
                                         flg_00 = True
+                                    # No se guardan los cambios
                                     elif opc_save.lower() == "n":
                                         print("Don't save changes")
                                         flg_0311 = False
                                         flg_031 = False
-                                        flg_03 = False
                                         flg_00 = True
 
 
-                                #editar armas del personaje
+                                # Editar armas del personaje
                                 elif opc_edit == 2:
-                                    rangelist= []
-                                    armas_disponibles= "Available Weapons".center(40,"=")
-                                    armas_personajes = "Character Weapons:".center(40,"=")
-                                    sin_armas="None".center(30,"-")
+                                    rangelist = []
+                                    armas_disponibles = "Available Weapons".center(40, "=")
+                                    armas_personajes = "Character Weapons:".center(40, "=")
+                                    sin_armas = "None".center(30, "-")
+                                    agregar_armas = "Add Weapons:\nWeapon Id) To add weapon Id\n0) Finish add weapons\n-Weapon Id) Delete weapon Id"
+                                    flg_0312 = False
+
+                                    # Armas actuales del personaje
                                     for w in personaje["weapons"]:
                                         rangelist.append(w)
-                                    print("rangelist = ",rangelist)
-                                    print(armas_disponibles)
-                                    if len(dict_weapons) == 0:
-                                        print(sin_armas)
-                                    else:
-                                        for a in dict_weapons:
-                                            armas= dict_weapons[a]
-                                        print(armas_personajes)
-                                        print("{} ) {}, Strength: {}, Speed {}".format(a, armas["name"], armas["strength"], armas["speed"]))
-                                        flg_0311 = False
-                                        flg_031 = False
-                                        flg_03 = False
-                                        flg_00 = True
+
+                                    # Entrar al menu de editar armas
+                                    flg_0312 = True
+                                    flg_031 = False
+                                    while flg_0312:
+                                        # Mostrar menú
+                                        print(armas_disponibles)
+                                        puede_elegir_mas = True
+
+                                        # Comprobar si puede eligir armas
+                                        if len(personaje["weapons"]) >= 2:
+                                            puede_elegir_mas = False
+
+                                        for w in personaje["weapons"]:
+                                            if dict_weapons[w]["two_hand"]:
+                                                puede_elegir_mas = False
+                                                break
+
+                                        # Mostrar si puede elegir armas y comprobar si ya tiene un arma two_hand
+                                        tiene_two_hand = False
+                                        for w in personaje["weapons"]:
+                                            if dict_weapons[w]["two_hand"]:
+                                                tiene_two_hand = True
+                                                break
+
+                                        if puede_elegir_mas:
+                                            for a in dict_weapons:
+                                                arma = dict_weapons[a]
+
+                                                # Si tiene un arma two_hand, no mostrar otras
+                                                if tiene_two_hand and not arma["two_hand"]:
+                                                    continue
+
+                                                # Si tiene arma de una mano no mostrar armas de dos manos
+                                                if len(personaje["weapons"]) == 1 and not dict_weapons[personaje["weapons"][0]]["two_hand"]:
+                                                    if arma["two_hand"]:
+                                                        continue
+
+                                                # Mostrar armas que puede usar
+                                                print("{} ) {}, Strength: {}, Speed {}".format(
+                                                    a, arma["name"], arma["strength"], arma["speed"]))
+                                        else:
+                                            print(sin_armas)
+
+                                        # Si el personae no tiene armas
+                                        print("\n" + armas_personajes)
+                                        if len(personaje["weapons"]) == 0:
+                                            print(sin_armas)
+                                        else:
+                                            # Si tiene las muestra
+                                            for w in personaje["weapons"]:
+                                                arma = dict_weapons[w]
+                                                print("{} ) {}, Strength: {}, Speed {}".format(
+                                                    w, arma["name"], arma["strength"], arma["speed"]
+                                                ))
+
+                                        print("\n" + agregar_armas)
+                                        opc_edit = input("->Option: ")
+
+                                        if opc_edit == "0":
+                                            flg_0312 = False
+                                            flg_0311 = False
+                                            flg_031 = False
+                                            flg_03 = True
+
+                                        elif len(opc_edit) > 1 and opc_edit[0] == "-" and opc_edit[1:].isdigit():
+                                            weapon_id = int(opc_edit[1:])
+                                            if weapon_id in personaje["weapons"]:
+                                                personaje["weapons"].remove(weapon_id)
+                                            else:
+                                                print("Invalid Option".center(40, "="))
+                                                input("Enter to continue")
+
+                                        elif opc_edit.isdigit():
+                                            weapon_id = int(opc_edit)
+                                            if puede_elegir_mas and weapon_id in dict_weapons:
+                                                personaje["weapons"].append(weapon_id)
+                                            else:
+                                                print("Invalid Option".center(40, "="))
+                                                input("Enter to continue")
+
+                                        else:
+                                            print("Invalid Option".center(40, "="))
+                                            input("Enter to continue")
+
                                 elif opc_edit == 3:
                                     flg_0311=False
                                     flg_031 = True
 
-                    flg_00 = True
-                    flg_03=False
-
-
-
-
             elif opc == 2:
-                print("Edit Weapons")
+                menu032= "Menu 032 (Select Weapon to Edit)".center(40, "=")
+                menu032X= "Menu 032X (Weapon Feature to Edit)".center(40,"=")+"\n1)Name\n2)Plus Strength\n3)Plus speed\n4)Go back\n"
+                flg_032= True
+                flg_032x = False
+                while flg_032:
+                    print(menu032)
+                    # Mostrar armas a editar
+                    for w in dict_weapons:
+                        arma = dict_weapons[w]
+                        print("{} ) {}, Strength: {}, Speed {}".format(w, arma["name"], arma["strength"], arma["speed"]))
+                    opc_edit_weapon=input("ID weapon to edit:\n")
+                    if not opc_edit_weapon.isdigit():
+                        print("Invalid Option".center(40, "="))
+                        input("Enter to continue")
+                    elif not int(opc_edit_weapon) in dict_weapons:
+                        print("Invalid Option".center(40, "="))
+                        input("Enter to continue")
+                    else:
+                        opc_edit_weapon=int(opc_edit_weapon)
+                        arma=dict_weapons[opc_edit_weapon]
+                        flg_032= False
+                        flg_032x = True
+
+                        # Entramos al menu32X
+                        while flg_032x:
+                            print(menu032X)
+                            print("Select feature to edit to weapon ID: {}, Name: {}".format(opc_edit_weapon,arma["name"]))
+                            opc_weapon=  input("->Option: ")
+                            if not opc_weapon.isdigit():
+                                print("Invalid Option".center(40, "="))
+                                input("Enter to continue")
+                            elif not (int(opc_weapon) in range(1, 5)):
+                                print("Invalid Option".center(40, "="))
+                                input("Enter to continue")
+                            else:
+                                opc_weapon= int(opc_weapon)
+                                # Nuevo nombre del arma
+                                if opc_weapon == 1:
+                                        weapon_edit = input("Enter the new name:\n")
+                                        while not weapon_edit.replace(" ","").isalpha():
+                                            print("Invalid Option".center(40, "="))
+                                            input("Enter to continue")
+                                            weapon_edit = input("Enter the new name:\n")
+                                        opc_save = input("Do you want to change name {} by {}?\n".format(arma["name"],weapon_edit))
+                                        while opc_save.lower() != "n" and opc_save.lower() != "y":
+                                            print("wrong option")
+                                            opc_save = input("Do you want to change name {} by {}?\n".format(arma["name"],weapon_edit))
+                                        # Para guardar los cambios
+                                        if opc_save.lower() == "y":
+                                                arma["name"] = weapon_edit
+                                                flg_032 = False
+                                                flg_032x = False
+                                                flg_00 = True
+                                        # No se guardan los cambios
+                                        elif opc_save.lower() == "n":
+                                                print("Don't save changes")
+                                                flg_032 = False
+                                                flg_032x = False
+                                                flg_00 = True
+                                # Nueva fuerza del arma
+                                elif opc_weapon == 2:
+                                    new_strength = input("Enter the new strength:\n")
+                                    while not new_strength.isdigit() or int(new_strength) not in range(1, 10):
+                                        print("Invalid Option".center(40, "="))
+                                        input("Enter to continue")
+                                        new_strength = input("Enter the new strength:\n")
+
+                                    opc_save = input("Do you want to change Strength {} by {} in the weapon {}?\n".format(arma["strength"],
+                                                                                                                                  new_strength,arma["name"]))
+                                    while opc_save.lower() != "n" and opc_save.lower() != "y":
+                                            print("wrong option")
+                                            opc_save = input("Do you want to change Strength {} by {} in the weapon {}?\n".format(arma["strength"],
+                                                                                                                                      new_strength,arma["name"]))
+                                    # Para guardar los cambios
+                                    if opc_save.lower() == "y":
+                                                arma["strength"] = int(new_strength)
+                                                flg_032 = False
+                                                flg_032x = False
+                                                flg_00 = True
+                                    # No se guardan los cambios
+                                    elif opc_save.lower() == "n":
+                                                print("Don't save changes")
+                                                flg_032 = False
+                                                flg_032x = False
+                                                flg_00 = True
+
+                                # Nueva velocidad del arma
+                                elif opc_weapon ==3:
+                                    new_speed = input("Enter the new Speed:\n")
+                                    while not new_speed.isdigit() or int(new_speed) not in range(1, 10):
+                                        print("Invalid Option".center(40, "="))
+                                        input("Enter to continue")
+                                        new_speed = input("Enter the new Speed:\n")
+
+                                    opc_save = input("Do you want to change Speed {} by {} in the weapon {}?\n".format(arma["speed"],
+                                                new_speed, arma["name"]))
+                                    while opc_save.lower() != "n" and opc_save.lower() != "y":
+                                            print("wrong option")
+                                            opc_save = input(
+                                                "Do you want to change Speed {} by {} in the weapon {}?\n".format(
+                                                    arma["speed"],
+                                                    new_speed, arma["name"]))
+                                    # Para guardar los cambios
+                                    if opc_save.lower() == "y":
+                                            arma["speed"] = int(new_speed)
+                                            flg_032 = False
+                                            flg_032x = False
+                                            flg_00 = True
+                                    # No se guardan los cambios
+                                    elif opc_save.lower() == "n":
+                                            print("Don't save changes")
+                                            flg_032 = False
+                                            flg_032x = False
+                                            flg_00 = True
+                                # Salir
+                                elif opc_weapon == 4:
+                                    flg_032= False
+                                    flg_032x= False
+                                    flg_03= True
+
+
+
+
+
             elif opc == 3:
                 flg_00 = True
                 flg_03=False
