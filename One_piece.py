@@ -1,10 +1,15 @@
 #MENUS
-menu00= "Menu 0 (One Piece)".center(40,"=")+"\n1)Play\n2)Create\n3)Edit\n4)List\n5)Exit\n"
-menu02 = "Menu02 Create".center(40,"=")+"\n1)Create Character\n2)Create Weapon\n3)Go back\n"
-menu021="Menu021 New Character".center(40,"=")
-menu022= "Menu022 (New Weapon)".center(40, "=")
-menu03= "Menu 03 (Edit Menu)".center(40,"=")+"\n1)Edit character\n2)Edit weapon\n3)Go back\n"
-menu031= "Menu 031 (Select Caracter to Edit)".center(40,"=")
+menu00= "Menu 0 (One Piece)".center(40,"=")+"\n1)Play\n2)Create\n3)Edit\n4)List\n5)Exit\n" #MENU PRINCIPAL
+menu02 = "Menu02 Create".center(40,"=")+"\n1)Create Character\n2)Create Weapon\n3)Go back\n" #MENU CREAR
+menu021="Menu021 New Character".center(40,"=") #MENU CREAR PERSONAJE
+menu_cat = "Side of the new character:\n1)Marine\n2)Pirates" #MENU CATEGORIA
+menu_cat_m = "Range or crew of the new character:\n1) Admiral\n2) ViceAdmiral\n3) Lieutenant" #MENU CATEGORIA MARINES
+menu_cat_p = "Range or crew of the new character:\n1) Straw hat\n2) Pirates Buggy\n3) Pirates Rocks" #MENU CATEGORIA PIRATAS
+menu022= "Menu022 (New Weapon)".center(40, "=") #MENU CREAR ARMA
+menu03= "Menu 03 (Edit Menu)".center(40,"=")+"\n1)Edit character\n2)Edit weapon\n3)Go back\n" #MENU EDITAR
+menu031= "Menu 031 (Select Character to Edit)".center(40,"=") #MENU EDITAR PERSONAJE
+menu032= "Menu 032 (Select Weapon to Edit)".center(40, "=") #MENU EDITAR ARMAS
+menu032X= "Menu 032X (Weapon Feature to Edit)".center(40,"=")+"\n1)Name\n2)Plus Strength\n3)Plus speed\n4)Go back\n" #MENU EDITAR ARMAS 2
 menu04_listar = "Menu04 (List)".center(40,"=")+"\n1)List Characters\n2)List Weapons\n3)List Side\n4)List Range\n5)Go back"
 menu041_listcharacters = "Menu041 (List Characters)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
 menu042_listweapons = "Menu042 (List Weapons)".center(40,"=")+"\n1)List by ID\n2)List by name\n3)List bu Streght\n4)List by speed\n5)Go back"
@@ -80,54 +85,397 @@ while not salir:
     #MENU OPC 2
     while flg_02:
         print(menu02)
-        opc=input("->Option: ")
+        opc = input("->Option: ")
         if not opc.isdigit():
-            print("Invalid Option".center(40,"="))
+            print("Invalid Option".center(40, "="))
             input("Press enter to continue")
-        elif not (int(opc) in range(1,4)):
-            print("Invalid Option".center(40,"="))
+        elif not (int(opc) in range(1, 4)):
+            print("Invalid Option".center(40, "="))
             input("Press enter to continue")
         else:
-            opc=int(opc)
+            opc = int(opc)
             if opc == 1:
-                flg_021 = False
-                flg_00 = True
-                #
-                # Name: new_character
-                # Category: ViceAdmiral
-                # Weapons:
-                # Strength: 9
-                # Speed: 6
-                # Experience: 0
-                # Save this player S\N
+                flg_021 = True
+                flg_00 = False
+
                 while flg_021:
-                    new_character= input("Name of the new character:\n")
-                    new_character.replace(" ","")
-                    print("Side of the new character:\n1)Marine\n2)Pirates")
-                    opc=input("->Option: ")
+                    nombre_personaje = input("Name of the new character:\n")
+                    print(menu_cat)
+                    opc = input("->Option: ")
                     if not opc.isdigit():
-                        print("Invalid Option".center(40,"="))
+                        print("Invalid Option".center(40, "="))
                         input("Press enter to continue")
-                    elif not (int(opc) in range(1,3)):
-                        print("Invalid Option".center(40,"="))
+                    elif not (int(opc) in range(1, 3)):
+                        print("Invalid Option".center(40, "="))
                         input("Press enter to continue")
                     else:
+                        opc = int(opc)
                         if opc == 1:
-                            print("1) Admiral 2) ViceAdmiral 3) lieutenant")
-                    # else:
-                    #     print("Range or crew of the new character:\n1) Admiral\n2) ViceAdmiral\n3) lieutenant")
-                    #     opc=input("->Option: ")
-                    #     if not opc.isdigit():
-                    #         print("Invalid Option".center(40,"="))
-                    #         input("Press enter to continue")
-                    #     elif not (int(opc) in range(1,4)):
-                    #         print("Invalid Option".center(40,"="))
-                    #         input("Press enter to continue")
-                    #     #else:
+                            print(menu_cat_m)
+                            opc_create = input("->Option: ")
+
+                            if not opc_create.isdigit():
+                                print("Invalid Option".center(40, "="))
+                                input("Press enter to continue")
+                            elif not (int(opc_create) in range(1, 4)):
+                                print("Invalid Option".center(40, "="))
+                                input("Press enter to continue")
+                            else:
+                                opc_create = int(opc_create)
+                                if opc_create == 1:
+                                    categoria = 4
+                                    fuerza = 5
+                                    velocidad = 6
+                                elif opc_create == 2:
+                                    categoria = 5
+                                    fuerza = 7
+                                    velocidad = 6
+                                elif opc_create == 3:
+                                    categoria = 6
+                                    fuerza = 5
+                                    velocidad = 5
+
+                                new_character = {"name": nombre_personaje,"category": categoria,"weapons": [],
+                                                 "strength": fuerza,"speed": velocidad,"experience": 0}
+
+                                # Escoger armas
+                                armas_disponibles = "Available Weapons".center(40, "=")
+                                armas_personajes = "Character Weapons:".center(40, "=")
+                                sin_armas = "None".center(30, "-")
+                                agregar_armas = "Add Weapons:\nWeapon Id) To add weapon Id\n0) Finish add weapons\n-Weapon Id) Delete weapon Id"
+                                flg_escoger_armas = True
+
+                                while flg_escoger_armas:
+                                    rangelist = []
+                                    puede_elegir_mas = True
+
+                                    if len(new_character["weapons"]) >= 2:
+                                        puede_elegir_mas = False
+
+                                    # Revisar si ya tiene un arma de dos manos
+                                    tiene_two_hand = False
+                                    for w in new_character["weapons"]:
+                                        if dict_weapons[w]["two_hand"]:
+                                            tiene_two_hand = True
+                                            puede_elegir_mas = False
+                                            break
+
+                                    # Llenar rangelist con las armas que puede escoger
+                                    if puede_elegir_mas:
+                                        for a in dict_weapons:
+                                            arma = dict_weapons[a]
+                                            if tiene_two_hand and not arma["two_hand"]:
+                                                continue
+                                            if len(new_character["weapons"]) == 1 and not \
+                                            dict_weapons[new_character["weapons"][0]]["two_hand"]:
+                                                if arma["two_hand"]:
+                                                    continue
+                                            rangelist.append(a)
+
+                                    # Mostrar rangelist antes del menu
+                                    if len(rangelist) == 0:
+                                        print("rangelist = [0]")
+                                    else:
+                                        print("rangelist =", rangelist)
+
+                                    print(armas_disponibles)
+
+                                    # Mostrar armas disponibles para escoger
+                                    if puede_elegir_mas:
+                                        for a in dict_weapons:
+                                            arma = dict_weapons[a]
+                                            if tiene_two_hand and not arma["two_hand"]:
+                                                continue
+                                            if len(new_character["weapons"]) == 1 and not \
+                                            dict_weapons[new_character["weapons"][0]]["two_hand"]:
+                                                if arma["two_hand"]:
+                                                    continue
+                                            print("{} ) {}, Strength: {}, Speed {}".format(
+                                                a, arma["name"], arma["strength"], arma["speed"]))
+                                    else:
+                                        sin_armas = "None".center(30, "-")
+                                        print(sin_armas)
+
+                                    print("\n" + armas_personajes)
+                                    if len(new_character["weapons"]) == 0:
+                                        print(sin_armas)
+                                    else:
+                                        for w in new_character["weapons"]:
+                                            arma = dict_weapons[w]
+                                            print("{} ) {}, Strength: {}, Speed {}".format(
+                                                w, arma["name"], arma["strength"], arma["speed"]))
+
+                                    print("\n" + agregar_armas)
+                                    opc_edit = input("->Option: ")
+
+                                    # Salir
+                                    if opc_edit == "0":
+                                        flg_escoger_armas = False
+                                        flg_02 = True
+
+                                    elif len(opc_edit) > 1 and opc_edit[0] == "-" and opc_edit[1:].isdigit():
+                                        weapon_id = int(opc_edit[1:])
+                                        if weapon_id in new_character["weapons"]:
+                                            new_character["weapons"].remove(weapon_id)
+                                        else:
+                                            print("Invalid Option".center(40, "="))
+                                            input("Enter to continue")
+
+                                    elif opc_edit.isdigit():
+                                        weapon_id = int(opc_edit)
+                                        if puede_elegir_mas and weapon_id in dict_weapons:
+                                            new_character["weapons"].append(weapon_id)
+                                        else:
+                                            print("Invalid Option".center(40, "="))
+                                            input("Enter to continue")
+
+                                    else:
+                                        print("Invalid Option".center(40, "="))
+                                        input("Enter to continue")
+
+                                # Guardar personaje
+                                new_id = len(dict_characters) + 1
+                                dict_characters[new_id] = new_character
+                                fuerza_total = 0
+                                velocidad_total = 0
+                                new_id = len(dict_characters) + 1
+                                dict_characters[new_id] = new_character
+
+                                for w in new_character["weapons"]:
+                                    arma = dict_weapons[w]
+                                    fuerza_total = fuerza_total+ arma["strength"]
+                                    velocidad_total = velocidad_total+ arma["speed"]
+
+                                fuerza_total = fuerza_total % 10
+                                velocidad_total = velocidad_total % 10
+
+                                # Actualizar personaje
+                                new_character["strength"] = fuerza_total
+                                new_character["speed"] = velocidad_total
+
+                                # Mostrar los datos del nuevo personaje
+                                if len(new_character["weapons"]) == 0:
+                                    armas_str = ""
+                                else:
+                                    armas_str = ""
+                                    for w in new_character["weapons"]:
+                                        arma = dict_weapons[w]
+                                        if armas_str != "":
+                                            armas_str = armas_str + ", "
+                                        armas_str = armas_str + "{}".format(arma["name"])
+
+
+                                # Plantilla con armas en la misma línea
+                                datos = (("\nThe new player will be:\n\nID: {}\nName: {}\nCategory: {}\nWeapons: {}\nStrength: {}\nSpeed: {}\nExperience: {}\n").format
+                                         (new_id,new_character["name"],dict_categorys[new_character["category"]],
+                                          armas_str,new_character["strength"],new_character["speed"],new_character["experience"]))
+
+                                print(datos)
+
+                                opc_save = input("Save this player S/N\n")
+                                if opc_save.lower() == "s":
+                                    print("Player saved!")
+                                    flg_021= False
+                                    flg_02 = False
+                                    flg_00= True
+                                else:
+                                    print("Player not saved.")
+                                    flg_021 = False
+                                    flg_02 = False
+                                    flg_00 = True
+
+                        elif opc == 2:
+                            print(menu_cat_p)
+                            opc_create = input("->Option: ")
+
+                            if not opc_create.isdigit():
+                                print("Invalid Option".center(40, "="))
+                                input("Press enter to continue")
+                            elif not (int(opc_create) in range(1, 4)):
+                                print("Invalid Option".center(40, "="))
+                                input("Press enter to continue")
+                            else:
+                                opc_create = int(opc_create)
+                                if opc_create == 1:
+                                    categoria = 1
+                                    fuerza = 5
+                                    velocidad = 6
+                                elif opc_create == 2:
+                                    categoria = 2
+                                    fuerza = 7
+                                    velocidad = 6
+                                elif opc_create == 3:
+                                    categoria = 3
+                                    fuerza = 5
+                                    velocidad = 5
+
+                                new_character = {"name": nombre_personaje,"category": categoria,"weapons": [],"strength": fuerza,
+                                                 "speed": velocidad,"experience": 0}
+
+                                # Escoger armas
+                                armas_disponibles = "Available Weapons".center(40, "=")
+                                armas_personajes = "Character Weapons:".center(40, "=")
+                                sin_armas = "None".center(30, "-")
+                                agregar_armas = "Add Weapons:\nWeapon Id) To add weapon Id\n0) Finish add weapons\n-Weapon Id) Delete weapon Id"
+                                flg_escoger_armas = True
+
+                                while flg_escoger_armas:
+                                        rangelist = []
+                                        puede_elegir_mas = True
+
+                                        if len(new_character["weapons"]) >= 2:
+                                            puede_elegir_mas = False
+
+                                        # Revisar si ya tiene un arma de dos manos
+                                        tiene_two_hand = False
+                                        for w in new_character["weapons"]:
+                                            if dict_weapons[w]["two_hand"]:
+                                                tiene_two_hand = True
+                                                puede_elegir_mas = False
+                                                break
+
+                                        # Llenar rangelist con las armas que puede escoger
+                                        if puede_elegir_mas:
+                                            for a in dict_weapons:
+                                                arma = dict_weapons[a]
+                                                if tiene_two_hand and not arma["two_hand"]:
+                                                    continue
+                                                if len(new_character["weapons"]) == 1 and not \
+                                                        dict_weapons[new_character["weapons"][0]]["two_hand"]:
+                                                    if arma["two_hand"]:
+                                                        continue
+                                                rangelist.append(a)
+
+                                        # Mostrar rangelist antes del menu
+                                        if len(rangelist) == 0:
+                                            print("rangelist = [0]")
+                                        else:
+                                            print("rangelist =", rangelist)
+
+                                        print(armas_disponibles)
+
+                                        if len(new_character["weapons"]) >= 2:
+                                            puede_elegir_mas = False
+
+                                        for w in new_character["weapons"]:
+                                            if dict_weapons[w]["two_hand"]:
+                                                puede_elegir_mas = False
+                                                break
+
+                                        tiene_two_hand = False
+                                        for w in new_character["weapons"]:
+                                            if dict_weapons[w]["two_hand"]:
+                                                tiene_two_hand = True
+                                                break
+
+                                        if puede_elegir_mas:
+                                            for a in dict_weapons:
+                                                arma = dict_weapons[a]
+                                                if tiene_two_hand and not arma["two_hand"]:
+                                                    continue
+                                                if len(new_character["weapons"]) == 1 and not \
+                                                        dict_weapons[new_character["weapons"][0]]["two_hand"]:
+                                                    if arma["two_hand"]:
+                                                        continue
+                                                print("{} ) {}, Strength: {}, Speed {}".format(
+                                                    a, arma["name"], arma["strength"], arma["speed"]))
+                                        else:
+                                            print(sin_armas)
+
+                                        print("\n" + armas_personajes)
+                                        if len(new_character["weapons"]) == 0:
+                                            print(sin_armas)
+                                        else:
+                                            for w in new_character["weapons"]:
+                                                arma = dict_weapons[w]
+                                                print("{} ) {}, Strength: {}, Speed {}".format(
+                                                    w, arma["name"], arma["strength"], arma["speed"]))
+
+                                        print("\n" + agregar_armas)
+                                        opc_edit = input("->Option: ")
+
+                                        if opc_edit == "0":
+                                            flg_escoger_armas = False
+                                            flg_02 = True
+
+                                        elif len(opc_edit) > 1 and opc_edit[0] == "-" and opc_edit[1:].isdigit():
+                                            weapon_id = int(opc_edit[1:])
+                                            if weapon_id in new_character["weapons"]:
+                                                new_character["weapons"].remove(weapon_id)
+                                            else:
+                                                print("Invalid Option".center(40, "="))
+                                                input("Enter to continue")
+
+                                        elif opc_edit.isdigit():
+                                            weapon_id = int(opc_edit)
+                                            if puede_elegir_mas and weapon_id in dict_weapons:
+                                                new_character["weapons"].append(weapon_id)
+                                            else:
+                                                print("Invalid Option".center(40, "="))
+                                                input("Enter to continue")
+
+                                        else:
+                                            print("Invalid Option".center(40, "="))
+                                            input("Enter to continue")
+
+                                # Guardar personaje
+                                new_id = len(dict_characters) + 1
+                                dict_characters[new_id] = new_character
+                                fuerza_total = 0
+                                velocidad_total = 0
+                                new_id = len(dict_characters) + 1
+                                dict_characters[new_id] = new_character
+
+                                for w in new_character["weapons"]:
+                                    arma = dict_weapons[w]
+                                    fuerza_total = fuerza_total + arma["strength"]
+                                    velocidad_total = velocidad_total + arma["speed"]
+
+                                fuerza_total = fuerza_total % 10
+                                velocidad_total = velocidad_total % 10
+
+                                # Actualizar personaje
+                                new_character["strength"] = fuerza_total
+                                new_character["speed"] = velocidad_total
+
+                                # Mostrar los datos del nuevo personaje
+                                if len(new_character["weapons"]) == 0:
+                                    armas_str = ""
+                                else:
+                                    armas_str = ""
+                                    for w in new_character["weapons"]:
+                                        arma = dict_weapons[w]
+                                        if armas_str != "":
+                                            armas_str = armas_str + ", "
+                                        armas_str = armas_str + "{}".format(arma["name"])
+
+                                # Plantilla con armas en la misma línea
+                                datos = ((
+                                             "\nThe new player will be:\n\nID: {}\nName: {}\nCategory: {}\nWeapons: {}\nStrength: {}\nSpeed: {}\nExperience: {}\n").format
+                                         (new_id, new_character["name"], dict_categorys[new_character["category"]],
+                                          armas_str, new_character["strength"], new_character["speed"],
+                                          new_character["experience"]))
+
+                                print(datos)
+
+                                opc_save = input("Save this player S/N\n")
+                                if opc_save.lower() == "s":
+                                    print("Player saved!")
+                                    flg_021 = False
+                                    flg_02 = False
+                                    flg_00 = True
+                                else:
+                                    print("Player not saved.")
+                                    flg_021 = False
+                                    flg_02 = False
+                                    flg_00 = True
+                        elif opc == 3:
+                            flg_021 = False
+                            flg_02 = True
+
 
             # CREACION DE ARMAS
             elif opc == 2:
-                print("Create Weapons")
                 flg_022 = True
                 while flg_022:
                     print(menu022)
@@ -278,65 +626,68 @@ while not salir:
                                     agregar_armas = "Add Weapons:\nWeapon Id) To add weapon Id\n0) Finish add weapons\n-Weapon Id) Delete weapon Id"
                                     flg_0312 = False
 
-                                    # Armas actuales del personaje
-                                    for w in personaje["weapons"]:
-                                        rangelist.append(w)
-
                                     # Entrar al menu de editar armas
                                     flg_0312 = True
                                     flg_031 = False
                                     while flg_0312:
-                                        # Mostrar menú
-                                        print(armas_disponibles)
+                                        # Reconstruir rangelist dinámicamente
+                                        rangelist = []
                                         puede_elegir_mas = True
 
-                                        # Comprobar si puede eligir armas
                                         if len(personaje["weapons"]) >= 2:
                                             puede_elegir_mas = False
 
-                                        for w in personaje["weapons"]:
-                                            if dict_weapons[w]["two_hand"]:
-                                                puede_elegir_mas = False
-                                                break
-
-                                        # Mostrar si puede elegir armas y comprobar si ya tiene un arma two_hand
+                                        # Revisar si ya tiene un arma de dos manos
                                         tiene_two_hand = False
                                         for w in personaje["weapons"]:
                                             if dict_weapons[w]["two_hand"]:
                                                 tiene_two_hand = True
+                                                puede_elegir_mas = False
                                                 break
 
+                                        # Llenar rangelist con las armas que puede escoger
                                         if puede_elegir_mas:
                                             for a in dict_weapons:
                                                 arma = dict_weapons[a]
-
-                                                # Si tiene un arma two_hand, no mostrar otras
                                                 if tiene_two_hand and not arma["two_hand"]:
                                                     continue
-
-                                                # Si tiene arma de una mano no mostrar armas de dos manos
-                                                if len(personaje["weapons"]) == 1 and not dict_weapons[personaje["weapons"][0]]["two_hand"]:
+                                                if len(personaje["weapons"]) == 1 and not \
+                                                dict_weapons[personaje["weapons"][0]]["two_hand"]:
                                                     if arma["two_hand"]:
                                                         continue
+                                                rangelist.append(a)
 
-                                                # Mostrar armas que puede usar
+                                        # Mostrar rangelist antes del menú
+                                        if len(rangelist) == 0:
+                                            print("rangelist = [0]")
+                                        else:
+                                            print("rangelist =", rangelist)
+
+                                        # Mostrar menú
+                                        print(armas_disponibles)
+
+                                        if puede_elegir_mas:
+                                            for a in rangelist:  # usar rangelist dinámico
+                                                arma = dict_weapons[a]
+
+                                                # Mostrar armas según reglas
                                                 print("{} ) {}, Strength: {}, Speed {}".format(
                                                     a, arma["name"], arma["strength"], arma["speed"]))
                                         else:
                                             print(sin_armas)
 
-                                        # Si el personae no tiene armas
+                                        # Armas actuales del personaje
                                         print("\n" + armas_personajes)
                                         if len(personaje["weapons"]) == 0:
                                             print(sin_armas)
                                         else:
-                                            # Si tiene las muestra
                                             for w in personaje["weapons"]:
                                                 arma = dict_weapons[w]
                                                 print("{} ) {}, Strength: {}, Speed {}".format(
                                                     w, arma["name"], arma["strength"], arma["speed"]
                                                 ))
 
+                                        # Opciones
                                         print("\n" + agregar_armas)
                                         opc_edit = input("->Option: ")
 
@@ -368,11 +719,11 @@ while not salir:
 
                                 elif opc_edit == 3:
                                     flg_0311=False
-                                    flg_031 = True
+                                    flg_031 = False
+                                    flg_03= True
+
 
             elif opc == 2:
-                menu032= "Menu 032 (Select Weapon to Edit)".center(40, "=")
-                menu032X= "Menu 032X (Weapon Feature to Edit)".center(40,"=")+"\n1)Name\n2)Plus Strength\n3)Plus speed\n4)Go back\n"
                 flg_032= True
                 flg_032x = False
                 while flg_032:
@@ -498,6 +849,7 @@ while not salir:
             elif opc == 3:
                 flg_00 = True
                 flg_03=False
+
 
 # MENU OPC 4
     while flg_04:
