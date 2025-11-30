@@ -125,8 +125,73 @@ while not salir:
                     #         input("Press enter to continue")
                     #     #else:
 
+            # CREACION DE ARMAS
             elif opc == 2:
                 print("Create Weapons")
+                flg_022 = True
+                while flg_022:
+                    print(menu022)
+
+                    # Nombre del arma
+                    new_weapon = input("Name of the new weapon:\n")
+                    new_weapon.replace(" ","")
+
+                    # añadir fuerza
+                    new_strength = input("Weapon Strength 1-9:\n->Strength: ")
+                    while not new_strength.isdigit() or int(new_strength) not in range(1, 10):
+                        print("Invalid Option".center(40, "="))
+                        input("Press enter to continue")
+                        new_strength = input("Weapon Strength 1-9:\n")
+                    new_strength = int(new_strength)
+
+                    # añadir velocidad
+                    new_speed = input("Weapon Speed 1-9:\n->Speed: ")
+                    while not new_speed.isdigit() or int(new_speed) not in range(1, 10):
+                        print("Invalid Option".center(40, "="))
+                        input("Press enter to continue")
+                        new_speed = input("Weapon Speed 1-9:\n")
+                    new_speed = int(new_speed)
+
+                    # tipo de arma una mano o a dos manos
+                    print("Kind of Weapon:\n1)One hand\n2)Two hands")
+                    opc_hand = input("->Option: ")
+                    # siempre que no sea digito o la opcion no sea ni 1 o 2... invalido y se repite
+                    while not opc_hand.isdigit() or int(opc_hand) not in (1,2):
+                        print("Invalid Option".center(40, "="))
+                        input("Press enter to continue")
+                        opc_hand = input("->Option: ")
+                    if int(opc_hand) == 2:
+                        two_hand = True
+                    else:
+                        two_hand = False
+
+                    # Confirmar guardado
+                    menu_confirmar_guardado = ("Name: {}\nStrength: {}\nSpeed: {}\nTwo hands type: {}"
+                                               .format(new_weapon,new_strength,new_speed,two_hand))
+                    print(menu_confirmar_guardado)
+
+                    # Confirmar guardado
+                    opc_save = input("Save this weapon S/N: ").lower()
+                    while opc_save not in ("s", "n"):
+                        print("Invalid Option".center(40, "="))
+                        input("Press enter to continue")
+                        opc_save = input("Save this weapon S/N: ")
+
+                    if opc_save.lower() == "s":
+                        # crear nuevo ID automáticamente
+                        new_id = len(dict_weapons) + 1
+                        dict_weapons[new_id] = {
+                            "name": new_weapon,
+                            "strength": new_strength,
+                            "speed": new_speed,
+                            "two_hand": two_hand
+                        }
+                        print("Saved new weapon with id = {}".format(new_id))
+######################################################################################################################
+
+                    # salir del menú de creación
+                    flg_022 = False
+                    flg_00 = True
             elif opc == 3:
                 flg_00= True
                 flg_02=False
