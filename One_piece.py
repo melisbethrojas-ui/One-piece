@@ -160,7 +160,7 @@ while not salir:
                                             puede_elegir_mas = False
                                             break
 
-                                    # Llenar rangelist con las armas que puede escoger
+                                    # Rangelist con las armas que puede escoger
                                     if puede_elegir_mas:
                                         for a in dict_weapons:
                                             arma = dict_weapons[a]
@@ -172,7 +172,7 @@ while not salir:
                                                     continue
                                             rangelist.append(a)
 
-                                    # Mostrar rangelist antes del menu
+                                    # Mostrar rangelist
                                     if len(rangelist) == 0:
                                         print("rangelist = [0]")
                                     else:
@@ -243,8 +243,8 @@ while not salir:
 
                                 for w in new_character["weapons"]:
                                     arma = dict_weapons[w]
-                                    fuerza_total = fuerza_total+ arma["strength"]
-                                    velocidad_total = velocidad_total+ arma["speed"]
+                                    fuerza_total = fuerza_total + fuerza + arma["strength"]
+                                    velocidad_total = velocidad_total + velocidad + arma["speed"]
 
                                 fuerza_total = fuerza_total % 10
                                 velocidad_total = velocidad_total % 10
@@ -265,7 +265,7 @@ while not salir:
                                         armas_str = armas_str + "{}".format(arma["name"])
 
 
-                                # Plantilla con armas en la misma línea
+                                # Datos del nuevo personaje
                                 datos = (("\nThe new player will be:\n\nID: {}\nName: {}\nCategory: {}\nWeapons: {}\nStrength: {}\nSpeed: {}\nExperience: {}\n").format
                                          (new_id,new_character["name"],dict_categorys[new_character["category"]],
                                           armas_str,new_character["strength"],new_character["speed"],new_character["experience"]))
@@ -334,7 +334,7 @@ while not salir:
                                                 puede_elegir_mas = False
                                                 break
 
-                                        # Llenar rangelist con las armas que puede escoger
+                                        # Rangelist con las armas que puede escoger
                                         if puede_elegir_mas:
                                             for a in dict_weapons:
                                                 arma = dict_weapons[a]
@@ -346,7 +346,6 @@ while not salir:
                                                         continue
                                                 rangelist.append(a)
 
-                                        # Mostrar rangelist antes del menu
                                         if len(rangelist) == 0:
                                             print("rangelist = [0]")
                                         else:
@@ -428,8 +427,8 @@ while not salir:
 
                                 for w in new_character["weapons"]:
                                     arma = dict_weapons[w]
-                                    fuerza_total = fuerza_total + arma["strength"]
-                                    velocidad_total = velocidad_total + arma["speed"]
+                                    fuerza_total = fuerza_total + fuerza + arma["strength"]
+                                    velocidad_total = velocidad_total + velocidad + arma["speed"]
 
                                 fuerza_total = fuerza_total % 10
                                 velocidad_total = velocidad_total % 10
@@ -449,9 +448,8 @@ while not salir:
                                             armas_str = armas_str + ", "
                                         armas_str = armas_str + "{}".format(arma["name"])
 
-                                # Plantilla con armas en la misma línea
-                                datos = ((
-                                             "\nThe new player will be:\n\nID: {}\nName: {}\nCategory: {}\nWeapons: {}\nStrength: {}\nSpeed: {}\nExperience: {}\n").format
+                                # Datos del nuevo personaje
+                                datos = (("\nThe new player will be:\n\nID: {}\nName: {}\nCategory: {}\nWeapons: {}\nStrength: {}\nSpeed: {}\nExperience: {}\n").format
                                          (new_id, new_character["name"], dict_categorys[new_character["category"]],
                                           armas_str, new_character["strength"], new_character["speed"],
                                           new_character["experience"]))
@@ -630,7 +628,6 @@ while not salir:
                                     flg_0312 = True
                                     flg_031 = False
                                     while flg_0312:
-                                        # Reconstruir rangelist dinámicamente
                                         rangelist = []
                                         puede_elegir_mas = True
 
@@ -667,7 +664,7 @@ while not salir:
                                         print(armas_disponibles)
 
                                         if puede_elegir_mas:
-                                            for a in rangelist:  # usar rangelist dinámico
+                                            for a in rangelist:  
                                                 arma = dict_weapons[a]
 
                                                 # Mostrar armas según reglas
@@ -687,7 +684,6 @@ while not salir:
                                                     w, arma["name"], arma["strength"], arma["speed"]
                                                 ))
 
-                                        # Opciones
                                         print("\n" + agregar_armas)
                                         opc_edit = input("->Option: ")
 
